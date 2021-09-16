@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public float timerViraSer = 0.1f;
     public float distanceBetweenImages;
 
-    public Transform chao;
+    public Transform chao   ;
 
    public LayerMask whatIsGround;
 
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     //Lógica para liberar pulo
     private void CheckIfCanJump()
     {
-        if(estaNoChao && rb.velocity.y <= 0.01f)
+        if(estaNoChao)
         {
             pulosRestantes = quantosPulos;
         }
@@ -113,9 +113,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        //anim.SetBool("isWalking", estaAndando);
-        //anim.SetBool("isGrounded", estaNoChao);
-        //anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isWalking", estaAndando);
+        anim.SetBool("isGrounded", estaNoChao);
+        anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
     private void CheckInput()
@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
+            pulosRestantes--;
             if(estaNoChao || (pulosRestantes > 0))
             {
                 NormalJump();
